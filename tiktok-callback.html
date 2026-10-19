@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paraclipper - TikTok Connection</title>
+  <style>
+    body {
+      background: #100b0b;
+      color: #f5e8ce;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 70px 20px;
+    }
+    h1 { color: #e7b650; }
+    .panel {
+      max-width: 550px;
+      margin: auto;
+      padding: 30px;
+      background: #201313;
+      border: 1px solid #a13d30;
+      border-radius: 16px;
+    }
+    p { line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>Paraclipper</h1>
+    <h2>TikTok Connection</h2>
+    <p id="status">Checking TikTok authorization...</p>
+    <p>Return to your local Paraclipper dashboard
+       to finish connecting your account.</p>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const status = document.getElementById("status");
+
+    if (params.has("error")) {
+      status.textContent =
+        "TikTok authorization was not completed: " +
+        params.get("error");
+    } else if (params.has("code") && params.has("state")) {
+      status.textContent =
+        "TikTok authorization received! Copy the full URL " +
+        "from your browser's address bar and paste it " +
+        "into the TikTok callback field in Paraclipper. " +
+        "Keep this URL private.";
+    } else {
+      status.textContent =
+        "Callback page is ready. Start TikTok login " +
+        "from the Paraclipper dashboard.";
+    }
+  </script>
+</body>
+</html>
